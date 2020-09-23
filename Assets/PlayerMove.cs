@@ -36,7 +36,7 @@ public class PlayerMove : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Space) && isGrounded)
         {
-            rb.AddForce(Vector3.up * forceJump * Time.deltaTime);
+            rb.AddForce(Vector3.up * forceJump * Time.deltaTime, ForceMode.Impulse);
         }
 
         /*if (Input.GetKey(KeyCode.Z))
