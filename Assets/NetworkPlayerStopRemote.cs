@@ -15,6 +15,7 @@ public class NetworkPlayerStopRemote : NetworkBehaviour
             playerMove.enabled = true;
             camera.enabled = true;
             audioListener.enabled = true;
+            transform.tag = "Player";
             
         }
         else
@@ -22,7 +23,22 @@ public class NetworkPlayerStopRemote : NetworkBehaviour
             playerMove.enabled = false;
             camera.enabled = false;
             audioListener.enabled = false;
+            transform.tag = "OtherPlayer";
+
 
         }
+    }
+    public override void OnStartClient()
+    {
+        base.OnStartClient();
+
+        string _netID = GetComponent<NetworkIdentity>().netId.ToString();
+        Player _player = GetComponent<Player>();
+        GameManager.RegisterPlayer(_netID, _player);
+        Debug.Log(_netID);
+    }
+    private void OnDisable()
+    {
+        GameManager.UnRegisterPlayer(transform.name);
     }
 }

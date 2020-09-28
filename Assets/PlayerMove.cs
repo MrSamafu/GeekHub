@@ -38,23 +38,5 @@ public class PlayerMove : MonoBehaviour
         {
             rb.AddForce(Vector3.up * forceJump * Time.deltaTime, ForceMode.Impulse);
         }
-
-        /*if (Input.GetKey(KeyCode.Z))
-        {
-            rb.velocity = Vector3.forward * speed * Time.deltaTime;
-        }
-        if (Input.GetKey(KeyCode.Q))
-        {
-            rb.velocity = Vector3.left * speed * Time.deltaTime;
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            rb.velocity = Vector3.back * speed * Time.deltaTime;
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            rb.velocity = Vector3.right * speed * Time.deltaTime;
-        }*/
-
     }
 }
