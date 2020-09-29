@@ -1,12 +1,21 @@
 ﻿using Mirror;
 using UnityEngine;
+using TMPro;
+using System;
+using UnityEngine.UI;
+
+
+
 
 public class PlayerShoot : NetworkBehaviour
 {
     public GameObject cam;
+    private TMP_Text messageBox;
+    private InputField messageSendingField;
     void Start()
     {
-
+        messageSendingField = GameObject.Find("SendingMsgArea").GetComponent<InputField>();
+        messageBox = GameObject.Find("Messages").GetComponent<TMP_Text>();
     }
 
     // Update is called once per frame
@@ -37,4 +46,25 @@ public class PlayerShoot : NetworkBehaviour
     {
         Debug.Log(_ID + " a été touché.");
     }
+    [Command]
+    public void SendingMessage(string msg)
+    {
+        ReceiveMsg(msg);
+    }
+    [Client]
+    public void Send()
+    {
+        if (messageSendingField.text != "")
+        {
+            string msg = messageBox.text + DateTime.Now.ToString("MM/dd/yyyy HH:mm") + " - " + messageSendingField.text + "<br>";
+            messageSendingField.text = "";
+            SendingMessage(msg);
+        }
+    }
+    [ClientRpc]
+    public void ReceiveMsg(string msg)
+    {
+        messageBox.text = msg;
+    }
+
 }
