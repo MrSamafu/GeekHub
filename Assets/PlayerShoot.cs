@@ -46,11 +46,6 @@ public class PlayerShoot : NetworkBehaviour
     {
         Debug.Log(_ID + " a été touché.");
     }
-    [Command]
-    public void SendingMessage(string msg)
-    {
-        ReceiveMsg(msg);
-    }
     [Client]
     public void Send()
     {
@@ -60,6 +55,12 @@ public class PlayerShoot : NetworkBehaviour
             messageSendingField.text = "";
             SendingMessage(msg);
         }
+    }
+
+    [Command]
+    public void SendingMessage(string msg)
+    {
+        ReceiveMsg(msg);
     }
     [ClientRpc]
     public void ReceiveMsg(string msg)
